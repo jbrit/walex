@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import OrderItem from "./components/OrderItem";
+import DetailPage from "./pages/DetailPage";
+import PaymentPage from "./pages/Payment Page";
 
 function App() {
+  const [step, setStep] = useState(0);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       <div className="bg-gray-100 min-h-screen py-16">
@@ -19,11 +22,16 @@ function App() {
       </div>
       <div className="min-h-screen py-16">
         <div className="px-4 sm:px:6 md:px-8">
-          <div className="w-full max-w-md h-96 mx-auto">
-            <div className="font-medium text-purple-900 text-3xl text-center">
-              What Do You Do?
-            </div>
-          </div>
+          {(() => {
+            switch (step) {
+              case 0:
+                return <DetailPage setStep={setStep} />;
+              case 1:
+                return <PaymentPage setStep={setStep} />;
+              default:
+                return <></>;
+            }
+          })()}
         </div>
       </div>
     </div>
